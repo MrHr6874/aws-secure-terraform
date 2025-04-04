@@ -85,11 +85,63 @@ git commit -m "Updated README documentation"
 git push origin main
 ```
 
-## Cleanup
-To destroy all resources:
-```bash
-terraform destroy -auto-approve
-```
+## Cleanup Steps
+To avoid incurring unnecessary AWS costs, follow these steps to properly destroy and disable the resources created:
+
+1. **Disable AWS Security Hub**
+   ```sh
+   aws securityhub disable-security-hub
+   ```
+
+2. **Delete AWS GuardDuty Detector**
+   - First, get the detector ID:
+     ```sh
+     aws guardduty list-detectors
+     ```
+   - Then delete the detector:
+     ```sh
+     aws guardduty delete-detector --detector-id <detector-id>
+     ```
+
+3. **Delete the IAM Role**
+   - Detach any policies before deleting:
+     ```sh
+     aws iam list-attached-role-policies --role-name SecurityAuditRole
+     ```
+   - Detach any policies (replace `<policy-arn>` with actual ARN):
+     ```sh
+     aws iam detach-role-policy --role-name SecurityAuditRole --policy-arn <policy-arn>
+     ```
+   - Delete the role:
+     ```sh
+     aws iam delete-role --role-name SecurityAuditRole
+     ```
+
+4. **Delete the S3 Bucket**
+   - Empty the bucket first:
+     ```sh
+     aws s3 rm s3://my-security-logs-<account_id> --recursive
+     ```
+   - Then delete the bucket:
+     ```sh
+     aws s3api delete-bucket --bucket my-security-logs-<account_id>
+     ```
+
+5. **Run Terraform Destroy**
+   - Navigate to your Terraform directory and run:
+     ```sh
+     terraform destroy -auto-approve
+     ```
+   - This will remove all resources defined in your Terraform configuration.
+
+6. **Verify Resources Are Deleted**
+   - Double-check if all services are removed:
+     ```sh
+     aws s3 ls
+     aws guardduty list-detectors
+     aws securityhub describe-hub
+     aws iam list-roles | grep SecurityAuditRole
+
 ## Lessons Learned
 1. **Infrastructure as Code (IaC) is powerful**: Using Terraform allows for consistent, repeatable deployments.
 2. **Security services are essential**: GuardDuty and Security Hub help detect and respond to security threats.
