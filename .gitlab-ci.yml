@@ -14,6 +14,17 @@ checkov_scan:
     when: always
     expire_in: 1 week
 
+trivy_iac_scan:
+  stage: security
+  image: aquasec/trivy
+  script:
+    - trivy config --format json --output trivy-report.json .
+  artifacts:
+    paths:
+      - trivy-report.json
+    when: always
+    expire_in: 1 week
+
 gitleaks:
   stage: security
   image:
