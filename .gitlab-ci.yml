@@ -18,14 +18,9 @@ tfsec_scan:
   stage: security
   image: aquasec/tfsec
   script:
-  - tfsec --format json --out tfsec-report.json
-  artifacts:
-    paths:
-      - tfsec-report.json
-    when: always
-    expire_in: 1 week
+  - tfsec .
 
-gitleaks:
+ gitleaks:
   stage: security
   image:
     name: zricethezav/gitleaks
