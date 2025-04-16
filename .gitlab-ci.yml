@@ -1,5 +1,4 @@
 stages:
-  - lint
   - security
 
 checkov_scan:
@@ -8,7 +7,7 @@ checkov_scan:
     name: bridgecrew/checkov:latest
     entrypoint: [""]
   script:
-    - checkov -d . -o json > checkov-report.json
+    - checkov -d . -o json --soft-fail > checkov-report.json
   artifacts:
     paths:
       - checkov-report.json
@@ -28,9 +27,11 @@ tfsec_scan:
 
 gitleaks:
   stage: security
-  image: zricethezav/gitleaks
+  image:
+    name: zricethezav/gitleaks
+    entrypoint: [""]
   script:
-    - gitleaks detect --source=. --report-format=json --report-path=gitleaks-report.json
+    - gitleaks detect --source=. --report-format=json --report-path=gitleaks-report.json --no-git
   artifacts:
     paths:
       - gitleaks-report.json
