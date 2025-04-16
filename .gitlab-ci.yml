@@ -18,7 +18,7 @@ tfsec_scan:
   stage: security
   image: aquasec/tfsec
   script:
-    - tfsec . --format json --out tfsec-report.json
+  - tfsec --config-file tfsec-config.json --format json --out tfsec-report.json
   artifacts:
     paths:
       - tfsec-report.json
