@@ -1,0 +1,11 @@
+stages:
+  - security
+
+checkov_scan:
+  stage: security
+  image: bridgecrew/checkov:latest
+  script:
+    - checkov -d .
+  only:
+    - main
+    - merge_requests
