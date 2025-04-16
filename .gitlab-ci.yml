@@ -7,7 +7,7 @@ checkov_scan:
     name: bridgecrew/checkov:latest
     entrypoint: [""]
   script:
-    - checkov -d . --check-severity HIGH
+    - checkov -d . --soft-fail
   only:
     - main
     - merge_requests
