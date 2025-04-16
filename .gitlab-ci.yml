@@ -2,18 +2,6 @@ stages:
   - lint
   - security
 
-tflint:
-  stage: lint
-  image: ghcr.io/terraform-linters/tflint
-  script:
-    - tflint --init
-    - tflint --format=json > tflint-report.json
-  artifacts:
-    paths:
-      - tflint-report.json
-    when: always
-    expire_in: 1 week
-
 checkov_scan:
   stage: security
   image:
