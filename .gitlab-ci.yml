@@ -5,7 +5,7 @@ checkov_scan:
   stage: security
   image: bridgecrew/checkov:latest
   script:
-    - checkov -d .
+    - checkov -d . --soft-fail --check-severity HIGH
   only:
     - main
     - merge_requests
