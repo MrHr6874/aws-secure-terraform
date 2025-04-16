@@ -14,7 +14,7 @@ checkov_scan:
     when: always
     expire_in: 1 week
 
- gitleaks:
+gitleaks:
   stage: security
   image:
     name: zricethezav/gitleaks
