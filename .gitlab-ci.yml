@@ -14,12 +14,6 @@ checkov_scan:
     when: always
     expire_in: 1 week
 
-tfsec_scan:
-  stage: security
-  image: aquasec/tfsec
-  script:
-  - tfsec .
-
  gitleaks:
   stage: security
   image:
