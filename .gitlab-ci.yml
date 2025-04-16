@@ -3,9 +3,12 @@ stages:
 
 checkov_scan:
   stage: security
-  image: bridgecrew/checkov:latest
+  image:
+    name: bridgecrew/checkov:latest
+    entrypoint: [""]
   script:
-    - checkov -d . --soft-fail --check-severity HIGH
+    - checkov -d . --check-severity HIGH
   only:
     - main
     - merge_requests
+
