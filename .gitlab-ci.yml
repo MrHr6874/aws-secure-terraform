@@ -16,7 +16,9 @@ checkov_scan:
 
 trivy_iac_scan:
   stage: security
-  image: aquasec/trivy
+  image:
+    name: aquasec/trivy
+    entrypoint: [""]
   script:
     - trivy config --format json --output trivy-report.json .
   artifacts:
