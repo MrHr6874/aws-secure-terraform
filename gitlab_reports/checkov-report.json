@@ -4,6 +4,55 @@
         "results": {
             "passed_checks": [
                 {
+                    "check_id": "CKV_AWS_41",
+                    "bc_check_id": "BC_AWS_SECRETS_5",
+                    "check_name": "Ensure no hard coded AWS access key and secret key exists in provider",
+                    "check_result": {
+                        "result": "PASSED",
+                        "evaluated_keys": []
+                    },
+                    "code_block": [
+                        [
+                            2,
+                            "provider \"aws\" {\n"
+                        ],
+                        [
+                            3,
+                            "  region = \"ap-south-1\"  # Change this to your preferred AWS region\n"
+                        ],
+                        [
+                            4,
+                            "}\n"
+                        ]
+                    ],
+                    "file_path": "/main.tf",
+                    "file_abs_path": "/builds/aws_secure/aws-secure-terraform/main.tf",
+                    "repo_file_path": "/main.tf",
+                    "file_line_range": [
+                        2,
+                        4
+                    ],
+                    "resource": "aws.default",
+                    "evaluations": null,
+                    "check_class": "checkov.terraform.checks.provider.aws.credentials",
+                    "fixed_definition": null,
+                    "entity_tags": null,
+                    "caller_file_path": null,
+                    "caller_file_line_range": null,
+                    "resource_address": null,
+                    "severity": null,
+                    "bc_category": null,
+                    "benchmarks": null,
+                    "description": null,
+                    "short_description": null,
+                    "vulnerability_details": null,
+                    "connected_node": null,
+                    "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/secrets-policies/bc-aws-secrets-5",
+                    "details": [],
+                    "check_len": null,
+                    "definition_context_file_path": "/builds/aws_secure/aws-secure-terraform/main.tf"
+                },
+                {
                     "check_id": "CKV_AWS_93",
                     "bc_check_id": "BC_AWS_S3_24",
                     "check_name": "Ensure S3 bucket policy does not lockout all but root user. (Prevent lockouts needing root account fixes)",
@@ -28,7 +77,7 @@
                         ]
                     ],
                     "file_path": "/main.tf",
-                    "file_abs_path": "/opt/aws-secure-terraform/main.tf",
+                    "file_abs_path": "/builds/aws_secure/aws-secure-terraform/main.tf",
                     "repo_file_path": "/main.tf",
                     "file_line_range": [
                         6,
@@ -52,102 +101,7 @@
                     "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/s3-policies/bc-aws-s3-24",
                     "details": [],
                     "check_len": null,
-                    "definition_context_file_path": "/opt/aws-secure-terraform/main.tf"
-                },
-                {
-                    "check_id": "CKV_AWS_93",
-                    "bc_check_id": "BC_AWS_S3_24",
-                    "check_name": "Ensure S3 bucket policy does not lockout all but root user. (Prevent lockouts needing root account fixes)",
-                    "check_result": {
-                        "result": "PASSED",
-                        "evaluated_keys": [
-                            "policy"
-                        ]
-                    },
-                    "code_block": [
-                        [
-                            11,
-                            "resource \"aws_s3_bucket_policy\" \"security_logs_policy\" {\n"
-                        ],
-                        [
-                            12,
-                            "  bucket = aws_s3_bucket.security_logs.id\n"
-                        ],
-                        [
-                            13,
-                            "  policy = jsonencode({\n"
-                        ],
-                        [
-                            14,
-                            "    Statement = [{\n"
-                        ],
-                        [
-                            15,
-                            "      Action    = [\"s3:GetObject\", \"s3:PutObject\"]\n"
-                        ],
-                        [
-                            16,
-                            "      Effect    = \"Allow\"\n"
-                        ],
-                        [
-                            17,
-                            "      Principal = {\n"
-                        ],
-                        [
-                            18,
-                            "        AWS = \"arn:aws:iam::${var.account_id}:root\"\n"
-                        ],
-                        [
-                            19,
-                            "      }\n"
-                        ],
-                        [
-                            20,
-                            "      Resource = \"arn:aws:s3:::${aws_s3_bucket.security_logs.id}/*\"\n"
-                        ],
-                        [
-                            21,
-                            "    }]\n"
-                        ],
-                        [
-                            22,
-                            "    Version = \"2012-10-17\"\n"
-                        ],
-                        [
-                            23,
-                            "  })\n"
-                        ],
-                        [
-                            24,
-                            "}\n"
-                        ]
-                    ],
-                    "file_path": "/main.tf",
-                    "file_abs_path": "/opt/aws-secure-terraform/main.tf",
-                    "repo_file_path": "/main.tf",
-                    "file_line_range": [
-                        11,
-                        24
-                    ],
-                    "resource": "aws_s3_bucket_policy.security_logs_policy",
-                    "evaluations": null,
-                    "check_class": "checkov.terraform.checks.resource.aws.S3ProtectAgainstPolicyLockout",
-                    "fixed_definition": null,
-                    "entity_tags": null,
-                    "caller_file_path": null,
-                    "caller_file_line_range": null,
-                    "resource_address": null,
-                    "severity": null,
-                    "bc_category": null,
-                    "benchmarks": null,
-                    "description": null,
-                    "short_description": null,
-                    "vulnerability_details": null,
-                    "connected_node": null,
-                    "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/s3-policies/bc-aws-s3-24",
-                    "details": [],
-                    "check_len": null,
-                    "definition_context_file_path": "/opt/aws-secure-terraform/main.tf"
+                    "definition_context_file_path": "/builds/aws_secure/aws-secure-terraform/main.tf"
                 },
                 {
                     "check_id": "CKV_AWS_70",
@@ -218,7 +172,7 @@
                         ]
                     ],
                     "file_path": "/main.tf",
-                    "file_abs_path": "/opt/aws-secure-terraform/main.tf",
+                    "file_abs_path": "/builds/aws_secure/aws-secure-terraform/main.tf",
                     "repo_file_path": "/main.tf",
                     "file_line_range": [
                         11,
@@ -242,7 +196,102 @@
                     "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/s3-policies/bc-aws-s3-23",
                     "details": [],
                     "check_len": null,
-                    "definition_context_file_path": "/opt/aws-secure-terraform/main.tf"
+                    "definition_context_file_path": "/builds/aws_secure/aws-secure-terraform/main.tf"
+                },
+                {
+                    "check_id": "CKV_AWS_93",
+                    "bc_check_id": "BC_AWS_S3_24",
+                    "check_name": "Ensure S3 bucket policy does not lockout all but root user. (Prevent lockouts needing root account fixes)",
+                    "check_result": {
+                        "result": "PASSED",
+                        "evaluated_keys": [
+                            "policy"
+                        ]
+                    },
+                    "code_block": [
+                        [
+                            11,
+                            "resource \"aws_s3_bucket_policy\" \"security_logs_policy\" {\n"
+                        ],
+                        [
+                            12,
+                            "  bucket = aws_s3_bucket.security_logs.id\n"
+                        ],
+                        [
+                            13,
+                            "  policy = jsonencode({\n"
+                        ],
+                        [
+                            14,
+                            "    Statement = [{\n"
+                        ],
+                        [
+                            15,
+                            "      Action    = [\"s3:GetObject\", \"s3:PutObject\"]\n"
+                        ],
+                        [
+                            16,
+                            "      Effect    = \"Allow\"\n"
+                        ],
+                        [
+                            17,
+                            "      Principal = {\n"
+                        ],
+                        [
+                            18,
+                            "        AWS = \"arn:aws:iam::${var.account_id}:root\"\n"
+                        ],
+                        [
+                            19,
+                            "      }\n"
+                        ],
+                        [
+                            20,
+                            "      Resource = \"arn:aws:s3:::${aws_s3_bucket.security_logs.id}/*\"\n"
+                        ],
+                        [
+                            21,
+                            "    }]\n"
+                        ],
+                        [
+                            22,
+                            "    Version = \"2012-10-17\"\n"
+                        ],
+                        [
+                            23,
+                            "  })\n"
+                        ],
+                        [
+                            24,
+                            "}\n"
+                        ]
+                    ],
+                    "file_path": "/main.tf",
+                    "file_abs_path": "/builds/aws_secure/aws-secure-terraform/main.tf",
+                    "repo_file_path": "/main.tf",
+                    "file_line_range": [
+                        11,
+                        24
+                    ],
+                    "resource": "aws_s3_bucket_policy.security_logs_policy",
+                    "evaluations": null,
+                    "check_class": "checkov.terraform.checks.resource.aws.S3ProtectAgainstPolicyLockout",
+                    "fixed_definition": null,
+                    "entity_tags": null,
+                    "caller_file_path": null,
+                    "caller_file_line_range": null,
+                    "resource_address": null,
+                    "severity": null,
+                    "bc_category": null,
+                    "benchmarks": null,
+                    "description": null,
+                    "short_description": null,
+                    "vulnerability_details": null,
+                    "connected_node": null,
+                    "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/s3-policies/bc-aws-s3-24",
+                    "details": [],
+                    "check_len": null,
+                    "definition_context_file_path": "/builds/aws_secure/aws-secure-terraform/main.tf"
                 },
                 {
                     "check_id": "CKV_AWS_238",
@@ -269,7 +318,7 @@
                         ]
                     ],
                     "file_path": "/main.tf",
-                    "file_abs_path": "/opt/aws-secure-terraform/main.tf",
+                    "file_abs_path": "/builds/aws_secure/aws-secure-terraform/main.tf",
                     "repo_file_path": "/main.tf",
                     "file_line_range": [
                         31,
@@ -293,7 +342,123 @@
                     "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-general-policies/ensure-aws-guardduty-detector-is-enabled",
                     "details": [],
                     "check_len": null,
-                    "definition_context_file_path": "/opt/aws-secure-terraform/main.tf"
+                    "definition_context_file_path": "/builds/aws_secure/aws-secure-terraform/main.tf"
+                },
+                {
+                    "check_id": "CKV_AWS_274",
+                    "bc_check_id": "BC_AWS_IAM_78",
+                    "check_name": "Disallow IAM roles, users, and groups from using the AWS AdministratorAccess policy",
+                    "check_result": {
+                        "result": "PASSED",
+                        "evaluated_keys": []
+                    },
+                    "code_block": [
+                        [
+                            38,
+                            "resource \"aws_iam_role\" \"security_audit_role\" {\n"
+                        ],
+                        [
+                            39,
+                            "  name = \"SecurityAuditRole\"\n"
+                        ],
+                        [
+                            40,
+                            "\n"
+                        ],
+                        [
+                            41,
+                            "  assume_role_policy = jsonencode({\n"
+                        ],
+                        [
+                            42,
+                            "    Version = \"2012-10-17\",\n"
+                        ],
+                        [
+                            43,
+                            "    Statement = [{\n"
+                        ],
+                        [
+                            44,
+                            "      Action = \"sts:AssumeRole\",\n"
+                        ],
+                        [
+                            45,
+                            "      Effect = \"Allow\",\n"
+                        ],
+                        [
+                            46,
+                            "      Principal = {\n"
+                        ],
+                        [
+                            47,
+                            "        AWS = \"arn:aws:iam::${var.account_id}:root\"\n"
+                        ],
+                        [
+                            48,
+                            "      }\n"
+                        ],
+                        [
+                            49,
+                            "    }]\n"
+                        ],
+                        [
+                            50,
+                            "  })\n"
+                        ],
+                        [
+                            51,
+                            "\n"
+                        ],
+                        [
+                            52,
+                            "  tags = {\n"
+                        ],
+                        [
+                            53,
+                            "    Name        = \"Security Audit Role\"\n"
+                        ],
+                        [
+                            54,
+                            "    Environment = \"Production\"\n"
+                        ],
+                        [
+                            55,
+                            "  }\n"
+                        ],
+                        [
+                            56,
+                            "}\n"
+                        ]
+                    ],
+                    "file_path": "/main.tf",
+                    "file_abs_path": "/builds/aws_secure/aws-secure-terraform/main.tf",
+                    "repo_file_path": "/main.tf",
+                    "file_line_range": [
+                        38,
+                        56
+                    ],
+                    "resource": "aws_iam_role.security_audit_role",
+                    "evaluations": null,
+                    "check_class": "checkov.terraform.checks.resource.aws.IAMManagedAdminPolicy",
+                    "fixed_definition": null,
+                    "entity_tags": {
+                        "Environment": "Production",
+                        "Name": "Security Audit Role"
+                    },
+                    "caller_file_path": null,
+                    "caller_file_line_range": null,
+                    "resource_address": null,
+                    "severity": null,
+                    "bc_category": null,
+                    "benchmarks": null,
+                    "description": null,
+                    "short_description": null,
+                    "vulnerability_details": null,
+                    "connected_node": null,
+                    "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-iam-policies/bc-aws-274",
+                    "details": [],
+                    "check_len": null,
+                    "definition_context_file_path": "/builds/aws_secure/aws-secure-terraform/main.tf"
                 },
                 {
                     "check_id": "CKV_AWS_60",
@@ -384,7 +549,7 @@
                         ]
                     ],
                     "file_path": "/main.tf",
-                    "file_abs_path": "/opt/aws-secure-terraform/main.tf",
+                    "file_abs_path": "/builds/aws_secure/aws-secure-terraform/main.tf",
                     "repo_file_path": "/main.tf",
                     "file_line_range": [
                         38,
@@ -411,7 +576,7 @@
                     "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-iam-policies/bc-aws-iam-44",
                     "details": [],
                     "check_len": null,
-                    "definition_context_file_path": "/opt/aws-secure-terraform/main.tf"
+                    "definition_context_file_path": "/builds/aws_secure/aws-secure-terraform/main.tf"
                 },
                 {
                     "check_id": "CKV_AWS_61",
@@ -502,7 +667,7 @@
                         ]
                     ],
                     "file_path": "/main.tf",
-                    "file_abs_path": "/opt/aws-secure-terraform/main.tf",
+                    "file_abs_path": "/builds/aws_secure/aws-secure-terraform/main.tf",
                     "repo_file_path": "/main.tf",
                     "file_line_range": [
                         38,
@@ -529,109 +694,61 @@
                     "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-iam-policies/bc-aws-iam-45",
                     "details": [],
                     "check_len": null,
-                    "definition_context_file_path": "/opt/aws-secure-terraform/main.tf"
+                    "definition_context_file_path": "/builds/aws_secure/aws-secure-terraform/main.tf"
                 },
                 {
-                    "check_id": "CKV_AWS_274",
-                    "bc_check_id": "BC_AWS_IAM_78",
-                    "check_name": "Disallow IAM roles, users, and groups from using the AWS AdministratorAccess policy",
+                    "check_id": "CKV_AWS_20",
+                    "bc_check_id": "BC_AWS_S3_1",
+                    "check_name": "S3 Bucket has an ACL defined which allows public READ access.",
                     "check_result": {
                         "result": "PASSED",
-                        "evaluated_keys": []
+                        "entity": {
+                            "aws_s3_bucket": {
+                                "security_logs": {
+                                    "__end_line__": 8,
+                                    "__start_line__": 6,
+                                    "bucket": [
+                                        "my-security-logs-${var.account_id}"
+                                    ],
+                                    "__address__": "aws_s3_bucket.security_logs",
+                                    "__provider_address__": "aws.default"
+                                }
+                            }
+                        },
+                        "evaluated_keys": [
+                            "acl",
+                            "access_control_policy/grant/*/grantee/uri",
+                            "resource_type",
+                            "access_control_policy/grant",
+                            "access_control_policy"
+                        ]
                     },
                     "code_block": [
                         [
-                            38,
-                            "resource \"aws_iam_role\" \"security_audit_role\" {\n"
+                            6,
+                            "resource \"aws_s3_bucket\" \"security_logs\" {\n"
                         ],
                         [
-                            39,
-                            "  name = \"SecurityAuditRole\"\n"
+                            7,
+                            "  bucket = \"my-security-logs-${var.account_id}\"\n"
                         ],
                         [
-                            40,
-                            "\n"
-                        ],
-                        [
-                            41,
-                            "  assume_role_policy = jsonencode({\n"
-                        ],
-                        [
-                            42,
-                            "    Version = \"2012-10-17\",\n"
-                        ],
-                        [
-                            43,
-                            "    Statement = [{\n"
-                        ],
-                        [
-                            44,
-                            "      Action = \"sts:AssumeRole\",\n"
-                        ],
-                        [
-                            45,
-                            "      Effect = \"Allow\",\n"
-                        ],
-                        [
-                            46,
-                            "      Principal = {\n"
-                        ],
-                        [
-                            47,
-                            "        AWS = \"arn:aws:iam::${var.account_id}:root\"\n"
-                        ],
-                        [
-                            48,
-                            "      }\n"
-                        ],
-                        [
-                            49,
-                            "    }]\n"
-                        ],
-                        [
-                            50,
-                            "  })\n"
-                        ],
-                        [
-                            51,
-                            "\n"
-                        ],
-                        [
-                            52,
-                            "  tags = {\n"
-                        ],
-                        [
-                            53,
-                            "    Name        = \"Security Audit Role\"\n"
-                        ],
-                        [
-                            54,
-                            "    Environment = \"Production\"\n"
-                        ],
-                        [
-                            55,
-                            "  }\n"
-                        ],
-                        [
-                            56,
+                            8,
                             "}\n"
                         ]
                     ],
                     "file_path": "/main.tf",
-                    "file_abs_path": "/opt/aws-secure-terraform/main.tf",
+                    "file_abs_path": "/builds/aws_secure/aws-secure-terraform/main.tf",
                     "repo_file_path": "/main.tf",
                     "file_line_range": [
-                        38,
-                        56
+                        6,
+                        8
                     ],
-                    "resource": "aws_iam_role.security_audit_role",
+                    "resource": "aws_s3_bucket.security_logs",
                     "evaluations": null,
-                    "check_class": "checkov.terraform.checks.resource.aws.IAMManagedAdminPolicy",
+                    "check_class": "checkov.common.graph.checks_infra.base_check",
                     "fixed_definition": null,
-                    "entity_tags": {
-                        "Environment": "Production",
-                        "Name": "Security Audit Role"
-                    },
+                    "entity_tags": {},
                     "caller_file_path": null,
                     "caller_file_line_range": null,
                     "resource_address": null,
@@ -642,59 +759,10 @@
                     "short_description": null,
                     "vulnerability_details": null,
                     "connected_node": null,
-                    "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-iam-policies/bc-aws-274",
+                    "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/s3-policies/s3-1-acl-read-permissions-everyone",
                     "details": [],
                     "check_len": null,
-                    "definition_context_file_path": "/opt/aws-secure-terraform/main.tf"
-                },
-                {
-                    "check_id": "CKV_AWS_41",
-                    "bc_check_id": "BC_AWS_SECRETS_5",
-                    "check_name": "Ensure no hard coded AWS access key and secret key exists in provider",
-                    "check_result": {
-                        "result": "PASSED",
-                        "evaluated_keys": []
-                    },
-                    "code_block": [
-                        [
-                            2,
-                            "provider \"aws\" {\n"
-                        ],
-                        [
-                            3,
-                            "  region = \"ap-south-1\"  # Change this to your preferred AWS region\n"
-                        ],
-                        [
-                            4,
-                            "}\n"
-                        ]
-                    ],
-                    "file_path": "/main.tf",
-                    "file_abs_path": "/opt/aws-secure-terraform/main.tf",
-                    "repo_file_path": "/main.tf",
-                    "file_line_range": [
-                        2,
-                        4
-                    ],
-                    "resource": "aws.default",
-                    "evaluations": null,
-                    "check_class": "checkov.terraform.checks.provider.aws.credentials",
-                    "fixed_definition": null,
-                    "entity_tags": null,
-                    "caller_file_path": null,
-                    "caller_file_line_range": null,
-                    "resource_address": null,
-                    "severity": null,
-                    "bc_category": null,
-                    "benchmarks": null,
-                    "description": null,
-                    "short_description": null,
-                    "vulnerability_details": null,
-                    "connected_node": null,
-                    "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/secrets-policies/bc-aws-secrets-5",
-                    "details": [],
-                    "check_len": null,
-                    "definition_context_file_path": "/opt/aws-secure-terraform/main.tf"
+                    "definition_context_file_path": "/builds/aws_secure/aws-secure-terraform/main.tf"
                 },
                 {
                     "check_id": "CKV2_AWS_56",
@@ -736,11 +804,11 @@
                             }
                         },
                         "evaluated_keys": [
-                            "name",
-                            "policy_arn",
                             "managed_policy_arns/*",
-                            "managed_policy_arn",
-                            "arn"
+                            "arn",
+                            "policy_arn",
+                            "name",
+                            "managed_policy_arn"
                         ]
                     },
                     "code_block": [
@@ -822,7 +890,7 @@
                         ]
                     ],
                     "file_path": "/main.tf",
-                    "file_abs_path": "/opt/aws-secure-terraform/main.tf",
+                    "file_abs_path": "/builds/aws_secure/aws-secure-terraform/main.tf",
                     "repo_file_path": "/main.tf",
                     "file_line_range": [
                         38,
@@ -849,141 +917,7 @@
                     "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-iam-policies/bc-aws-2-56",
                     "details": [],
                     "check_len": null,
-                    "definition_context_file_path": "/opt/aws-secure-terraform/main.tf"
-                },
-                {
-                    "check_id": "CKV_AWS_20",
-                    "bc_check_id": "BC_AWS_S3_1",
-                    "check_name": "S3 Bucket has an ACL defined which allows public READ access.",
-                    "check_result": {
-                        "result": "PASSED",
-                        "entity": {
-                            "aws_s3_bucket": {
-                                "security_logs": {
-                                    "__end_line__": 8,
-                                    "__start_line__": 6,
-                                    "bucket": [
-                                        "my-security-logs-${var.account_id}"
-                                    ],
-                                    "__address__": "aws_s3_bucket.security_logs",
-                                    "__provider_address__": "aws.default"
-                                }
-                            }
-                        },
-                        "evaluated_keys": [
-                            "access_control_policy/grant",
-                            "access_control_policy/grant/*/grantee/uri",
-                            "acl",
-                            "resource_type",
-                            "access_control_policy"
-                        ]
-                    },
-                    "code_block": [
-                        [
-                            6,
-                            "resource \"aws_s3_bucket\" \"security_logs\" {\n"
-                        ],
-                        [
-                            7,
-                            "  bucket = \"my-security-logs-${var.account_id}\"\n"
-                        ],
-                        [
-                            8,
-                            "}\n"
-                        ]
-                    ],
-                    "file_path": "/main.tf",
-                    "file_abs_path": "/opt/aws-secure-terraform/main.tf",
-                    "repo_file_path": "/main.tf",
-                    "file_line_range": [
-                        6,
-                        8
-                    ],
-                    "resource": "aws_s3_bucket.security_logs",
-                    "evaluations": null,
-                    "check_class": "checkov.common.graph.checks_infra.base_check",
-                    "fixed_definition": null,
-                    "entity_tags": {},
-                    "caller_file_path": null,
-                    "caller_file_line_range": null,
-                    "resource_address": null,
-                    "severity": null,
-                    "bc_category": null,
-                    "benchmarks": null,
-                    "description": null,
-                    "short_description": null,
-                    "vulnerability_details": null,
-                    "connected_node": null,
-                    "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/s3-policies/s3-1-acl-read-permissions-everyone",
-                    "details": [],
-                    "check_len": null,
-                    "definition_context_file_path": "/opt/aws-secure-terraform/main.tf"
-                },
-                {
-                    "check_id": "CKV_AWS_19",
-                    "bc_check_id": "BC_AWS_S3_14",
-                    "check_name": "Ensure all data stored in the S3 bucket is securely encrypted at rest",
-                    "check_result": {
-                        "result": "PASSED",
-                        "entity": {
-                            "aws_s3_bucket": {
-                                "security_logs": {
-                                    "__end_line__": 8,
-                                    "__start_line__": 6,
-                                    "bucket": [
-                                        "my-security-logs-${var.account_id}"
-                                    ],
-                                    "__address__": "aws_s3_bucket.security_logs",
-                                    "__provider_address__": "aws.default"
-                                }
-                            }
-                        },
-                        "evaluated_keys": [
-                            "rule/apply_server_side_encryption_by_default/sse_algorithm",
-                            "resource_type",
-                            "server_side_encryption_configuration/rule/apply_server_side_encryption_by_default/sse_algorithm"
-                        ]
-                    },
-                    "code_block": [
-                        [
-                            6,
-                            "resource \"aws_s3_bucket\" \"security_logs\" {\n"
-                        ],
-                        [
-                            7,
-                            "  bucket = \"my-security-logs-${var.account_id}\"\n"
-                        ],
-                        [
-                            8,
-                            "}\n"
-                        ]
-                    ],
-                    "file_path": "/main.tf",
-                    "file_abs_path": "/opt/aws-secure-terraform/main.tf",
-                    "repo_file_path": "/main.tf",
-                    "file_line_range": [
-                        6,
-                        8
-                    ],
-                    "resource": "aws_s3_bucket.security_logs",
-                    "evaluations": null,
-                    "check_class": "checkov.common.graph.checks_infra.base_check",
-                    "fixed_definition": null,
-                    "entity_tags": {},
-                    "caller_file_path": null,
-                    "caller_file_line_range": null,
-                    "resource_address": null,
-                    "severity": null,
-                    "bc_category": null,
-                    "benchmarks": null,
-                    "description": null,
-                    "short_description": null,
-                    "vulnerability_details": null,
-                    "connected_node": null,
-                    "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/s3-policies/s3-14-data-encrypted-at-rest",
-                    "details": [],
-                    "check_len": null,
-                    "definition_context_file_path": "/opt/aws-secure-terraform/main.tf"
+                    "definition_context_file_path": "/builds/aws_secure/aws-secure-terraform/main.tf"
                 },
                 {
                     "check_id": "CKV_AWS_57",
@@ -1005,11 +939,11 @@
                             }
                         },
                         "evaluated_keys": [
-                            "access_control_policy/grant",
-                            "access_control_policy/grant/*/grantee/uri",
                             "acl",
                             "access_control_policy/grant/*/permission",
+                            "access_control_policy/grant/*/grantee/uri",
                             "resource_type",
+                            "access_control_policy/grant",
                             "access_control_policy"
                         ]
                     },
@@ -1028,7 +962,7 @@
                         ]
                     ],
                     "file_path": "/main.tf",
-                    "file_abs_path": "/opt/aws-secure-terraform/main.tf",
+                    "file_abs_path": "/builds/aws_secure/aws-secure-terraform/main.tf",
                     "repo_file_path": "/main.tf",
                     "file_line_range": [
                         6,
@@ -1052,10 +986,142 @@
                     "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/s3-policies/s3-2-acl-write-permissions-everyone",
                     "details": [],
                     "check_len": null,
-                    "definition_context_file_path": "/opt/aws-secure-terraform/main.tf"
+                    "definition_context_file_path": "/builds/aws_secure/aws-secure-terraform/main.tf"
+                },
+                {
+                    "check_id": "CKV_AWS_19",
+                    "bc_check_id": "BC_AWS_S3_14",
+                    "check_name": "Ensure all data stored in the S3 bucket is securely encrypted at rest",
+                    "check_result": {
+                        "result": "PASSED",
+                        "entity": {
+                            "aws_s3_bucket": {
+                                "security_logs": {
+                                    "__end_line__": 8,
+                                    "__start_line__": 6,
+                                    "bucket": [
+                                        "my-security-logs-${var.account_id}"
+                                    ],
+                                    "__address__": "aws_s3_bucket.security_logs",
+                                    "__provider_address__": "aws.default"
+                                }
+                            }
+                        },
+                        "evaluated_keys": [
+                            "resource_type",
+                            "server_side_encryption_configuration/rule/apply_server_side_encryption_by_default/sse_algorithm",
+                            "rule/apply_server_side_encryption_by_default/sse_algorithm"
+                        ]
+                    },
+                    "code_block": [
+                        [
+                            6,
+                            "resource \"aws_s3_bucket\" \"security_logs\" {\n"
+                        ],
+                        [
+                            7,
+                            "  bucket = \"my-security-logs-${var.account_id}\"\n"
+                        ],
+                        [
+                            8,
+                            "}\n"
+                        ]
+                    ],
+                    "file_path": "/main.tf",
+                    "file_abs_path": "/builds/aws_secure/aws-secure-terraform/main.tf",
+                    "repo_file_path": "/main.tf",
+                    "file_line_range": [
+                        6,
+                        8
+                    ],
+                    "resource": "aws_s3_bucket.security_logs",
+                    "evaluations": null,
+                    "check_class": "checkov.common.graph.checks_infra.base_check",
+                    "fixed_definition": null,
+                    "entity_tags": {},
+                    "caller_file_path": null,
+                    "caller_file_line_range": null,
+                    "resource_address": null,
+                    "severity": null,
+                    "bc_category": null,
+                    "benchmarks": null,
+                    "description": null,
+                    "short_description": null,
+                    "vulnerability_details": null,
+                    "connected_node": null,
+                    "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/s3-policies/s3-14-data-encrypted-at-rest",
+                    "details": [],
+                    "check_len": null,
+                    "definition_context_file_path": "/builds/aws_secure/aws-secure-terraform/main.tf"
                 }
             ],
             "failed_checks": [
+                {
+                    "check_id": "CKV2_AWS_6",
+                    "bc_check_id": "BC_AWS_NETWORKING_52",
+                    "check_name": "Ensure that S3 bucket has a Public Access block",
+                    "check_result": {
+                        "result": "FAILED",
+                        "entity": {
+                            "aws_s3_bucket": {
+                                "security_logs": {
+                                    "__end_line__": 8,
+                                    "__start_line__": 6,
+                                    "bucket": [
+                                        "my-security-logs-${var.account_id}"
+                                    ],
+                                    "__address__": "aws_s3_bucket.security_logs",
+                                    "__provider_address__": "aws.default"
+                                }
+                            }
+                        },
+                        "evaluated_keys": [
+                            "block_public_policy",
+                            "resource_type",
+                            "block_public_acls"
+                        ]
+                    },
+                    "code_block": [
+                        [
+                            6,
+                            "resource \"aws_s3_bucket\" \"security_logs\" {\n"
+                        ],
+                        [
+                            7,
+                            "  bucket = \"my-security-logs-${var.account_id}\"\n"
+                        ],
+                        [
+                            8,
+                            "}\n"
+                        ]
+                    ],
+                    "file_path": "/main.tf",
+                    "file_abs_path": "/builds/aws_secure/aws-secure-terraform/main.tf",
+                    "repo_file_path": "/main.tf",
+                    "file_line_range": [
+                        6,
+                        8
+                    ],
+                    "resource": "aws_s3_bucket.security_logs",
+                    "evaluations": null,
+                    "check_class": "checkov.common.graph.checks_infra.base_check",
+                    "fixed_definition": null,
+                    "entity_tags": {},
+                    "caller_file_path": null,
+                    "caller_file_line_range": null,
+                    "resource_address": null,
+                    "severity": null,
+                    "bc_category": null,
+                    "benchmarks": null,
+                    "description": null,
+                    "short_description": null,
+                    "vulnerability_details": null,
+                    "connected_node": null,
+                    "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-networking-policies/s3-bucket-should-have-public-access-blocks-defaults-to-false-if-the-public-access-block-is-not-attached",
+                    "details": [],
+                    "check_len": null,
+                    "definition_context_file_path": "/builds/aws_secure/aws-secure-terraform/main.tf"
+                },
                 {
                     "check_id": "CKV2_AWS_62",
                     "bc_check_id": "BC_AWS_LOGGING_36",
@@ -1094,7 +1160,7 @@
                         ]
                     ],
                     "file_path": "/main.tf",
-                    "file_abs_path": "/opt/aws-secure-terraform/main.tf",
+                    "file_abs_path": "/builds/aws_secure/aws-secure-terraform/main.tf",
                     "repo_file_path": "/main.tf",
                     "file_line_range": [
                         6,
@@ -1118,55 +1184,56 @@
                     "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-logging-policies/bc-aws-2-62",
                     "details": [],
                     "check_len": null,
-                    "definition_context_file_path": "/opt/aws-secure-terraform/main.tf"
+                    "definition_context_file_path": "/builds/aws_secure/aws-secure-terraform/main.tf"
                 },
                 {
-                    "check_id": "CKV_AWS_145",
-                    "bc_check_id": "BC_AWS_GENERAL_56",
-                    "check_name": "Ensure that S3 buckets are encrypted with KMS by default",
+                    "check_id": "CKV2_AWS_3",
+                    "bc_check_id": "BC_AWS_GENERAL_66",
+                    "check_name": "Ensure GuardDuty is enabled to specific org/region",
                     "check_result": {
                         "result": "FAILED",
                         "entity": {
-                            "aws_s3_bucket": {
-                                "security_logs": {
-                                    "__end_line__": 8,
-                                    "__start_line__": 6,
-                                    "bucket": [
-                                        "my-security-logs-${var.account_id}"
+                            "aws_guardduty_detector": {
+                                "gd": {
+                                    "__end_line__": 33,
+                                    "__start_line__": 31,
+                                    "enable": [
+                                        true
                                     ],
-                                    "__address__": "aws_s3_bucket.security_logs",
+                                    "__address__": "aws_guardduty_detector.gd",
                                     "__provider_address__": "aws.default"
                                 }
                             }
                         },
                         "evaluated_keys": [
-                            "rule/apply_server_side_encryption_by_default/sse_algorithm",
-                            "resource_type",
-                            "server_side_encryption_configuration/rule/apply_server_side_encryption_by_default/sse_algorithm"
+                            "auto_enable_organization_members",
+                            "auto_enable",
+                            "enable",
+                            "resource_type"
                         ]
                     },
                     "code_block": [
                         [
-                            6,
-                            "resource \"aws_s3_bucket\" \"security_logs\" {\n"
+                            31,
+                            "resource \"aws_guardduty_detector\" \"gd\" {\n"
                         ],
                         [
-                            7,
-                            "  bucket = \"my-security-logs-${var.account_id}\"\n"
+                            32,
+                            "  enable = true\n"
                         ],
                         [
-                            8,
+                            33,
                             "}\n"
                         ]
                     ],
                     "file_path": "/main.tf",
-                    "file_abs_path": "/opt/aws-secure-terraform/main.tf",
+                    "file_abs_path": "/builds/aws_secure/aws-secure-terraform/main.tf",
                     "repo_file_path": "/main.tf",
                     "file_line_range": [
-                        6,
-                        8
+                        31,
+                        33
                     ],
-                    "resource": "aws_s3_bucket.security_logs",
+                    "resource": "aws_guardduty_detector.gd",
                     "evaluations": null,
                     "check_class": "checkov.common.graph.checks_infra.base_check",
                     "fixed_definition": null,
@@ -1181,142 +1248,10 @@
                     "short_description": null,
                     "vulnerability_details": null,
                     "connected_node": null,
-                    "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-general-policies/ensure-that-s3-buckets-are-encrypted-with-kms-by-default",
+                    "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-general-policies/ensure-guardduty-is-enabled-to-specific-orgregion",
                     "details": [],
                     "check_len": null,
-                    "definition_context_file_path": "/opt/aws-secure-terraform/main.tf"
-                },
-                {
-                    "check_id": "CKV_AWS_21",
-                    "bc_check_id": "BC_AWS_S3_16",
-                    "check_name": "Ensure all data stored in the S3 bucket have versioning enabled",
-                    "check_result": {
-                        "result": "FAILED",
-                        "entity": {
-                            "aws_s3_bucket": {
-                                "security_logs": {
-                                    "__end_line__": 8,
-                                    "__start_line__": 6,
-                                    "bucket": [
-                                        "my-security-logs-${var.account_id}"
-                                    ],
-                                    "__address__": "aws_s3_bucket.security_logs",
-                                    "__provider_address__": "aws.default"
-                                }
-                            }
-                        },
-                        "evaluated_keys": [
-                            "versioning/enabled",
-                            "resource_type",
-                            "versioning_configuration/status"
-                        ]
-                    },
-                    "code_block": [
-                        [
-                            6,
-                            "resource \"aws_s3_bucket\" \"security_logs\" {\n"
-                        ],
-                        [
-                            7,
-                            "  bucket = \"my-security-logs-${var.account_id}\"\n"
-                        ],
-                        [
-                            8,
-                            "}\n"
-                        ]
-                    ],
-                    "file_path": "/main.tf",
-                    "file_abs_path": "/opt/aws-secure-terraform/main.tf",
-                    "repo_file_path": "/main.tf",
-                    "file_line_range": [
-                        6,
-                        8
-                    ],
-                    "resource": "aws_s3_bucket.security_logs",
-                    "evaluations": null,
-                    "check_class": "checkov.common.graph.checks_infra.base_check",
-                    "fixed_definition": null,
-                    "entity_tags": {},
-                    "caller_file_path": null,
-                    "caller_file_line_range": null,
-                    "resource_address": null,
-                    "severity": null,
-                    "bc_category": null,
-                    "benchmarks": null,
-                    "description": null,
-                    "short_description": null,
-                    "vulnerability_details": null,
-                    "connected_node": null,
-                    "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/s3-policies/s3-16-enable-versioning",
-                    "details": [],
-                    "check_len": null,
-                    "definition_context_file_path": "/opt/aws-secure-terraform/main.tf"
-                },
-                {
-                    "check_id": "CKV2_AWS_6",
-                    "bc_check_id": "BC_AWS_NETWORKING_52",
-                    "check_name": "Ensure that S3 bucket has a Public Access block",
-                    "check_result": {
-                        "result": "FAILED",
-                        "entity": {
-                            "aws_s3_bucket": {
-                                "security_logs": {
-                                    "__end_line__": 8,
-                                    "__start_line__": 6,
-                                    "bucket": [
-                                        "my-security-logs-${var.account_id}"
-                                    ],
-                                    "__address__": "aws_s3_bucket.security_logs",
-                                    "__provider_address__": "aws.default"
-                                }
-                            }
-                        },
-                        "evaluated_keys": [
-                            "resource_type",
-                            "block_public_policy",
-                            "block_public_acls"
-                        ]
-                    },
-                    "code_block": [
-                        [
-                            6,
-                            "resource \"aws_s3_bucket\" \"security_logs\" {\n"
-                        ],
-                        [
-                            7,
-                            "  bucket = \"my-security-logs-${var.account_id}\"\n"
-                        ],
-                        [
-                            8,
-                            "}\n"
-                        ]
-                    ],
-                    "file_path": "/main.tf",
-                    "file_abs_path": "/opt/aws-secure-terraform/main.tf",
-                    "repo_file_path": "/main.tf",
-                    "file_line_range": [
-                        6,
-                        8
-                    ],
-                    "resource": "aws_s3_bucket.security_logs",
-                    "evaluations": null,
-                    "check_class": "checkov.common.graph.checks_infra.base_check",
-                    "fixed_definition": null,
-                    "entity_tags": {},
-                    "caller_file_path": null,
-                    "caller_file_line_range": null,
-                    "resource_address": null,
-                    "severity": null,
-                    "bc_category": null,
-                    "benchmarks": null,
-                    "description": null,
-                    "short_description": null,
-                    "vulnerability_details": null,
-                    "connected_node": null,
-                    "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-networking-policies/s3-bucket-should-have-public-access-blocks-defaults-to-false-if-the-public-access-block-is-not-attached",
-                    "details": [],
-                    "check_len": null,
-                    "definition_context_file_path": "/opt/aws-secure-terraform/main.tf"
+                    "definition_context_file_path": "/builds/aws_secure/aws-secure-terraform/main.tf"
                 },
                 {
                     "check_id": "CKV_AWS_18",
@@ -1357,7 +1292,7 @@
                         ]
                     ],
                     "file_path": "/main.tf",
-                    "file_abs_path": "/opt/aws-secure-terraform/main.tf",
+                    "file_abs_path": "/builds/aws_secure/aws-secure-terraform/main.tf",
                     "repo_file_path": "/main.tf",
                     "file_line_range": [
                         6,
@@ -1381,7 +1316,73 @@
                     "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/s3-policies/s3-13-enable-logging",
                     "details": [],
                     "check_len": null,
-                    "definition_context_file_path": "/opt/aws-secure-terraform/main.tf"
+                    "definition_context_file_path": "/builds/aws_secure/aws-secure-terraform/main.tf"
+                },
+                {
+                    "check_id": "CKV_AWS_145",
+                    "bc_check_id": "BC_AWS_GENERAL_56",
+                    "check_name": "Ensure that S3 buckets are encrypted with KMS by default",
+                    "check_result": {
+                        "result": "FAILED",
+                        "entity": {
+                            "aws_s3_bucket": {
+                                "security_logs": {
+                                    "__end_line__": 8,
+                                    "__start_line__": 6,
+                                    "bucket": [
+                                        "my-security-logs-${var.account_id}"
+                                    ],
+                                    "__address__": "aws_s3_bucket.security_logs",
+                                    "__provider_address__": "aws.default"
+                                }
+                            }
+                        },
+                        "evaluated_keys": [
+                            "resource_type",
+                            "server_side_encryption_configuration/rule/apply_server_side_encryption_by_default/sse_algorithm",
+                            "rule/apply_server_side_encryption_by_default/sse_algorithm"
+                        ]
+                    },
+                    "code_block": [
+                        [
+                            6,
+                            "resource \"aws_s3_bucket\" \"security_logs\" {\n"
+                        ],
+                        [
+                            7,
+                            "  bucket = \"my-security-logs-${var.account_id}\"\n"
+                        ],
+                        [
+                            8,
+                            "}\n"
+                        ]
+                    ],
+                    "file_path": "/main.tf",
+                    "file_abs_path": "/builds/aws_secure/aws-secure-terraform/main.tf",
+                    "repo_file_path": "/main.tf",
+                    "file_line_range": [
+                        6,
+                        8
+                    ],
+                    "resource": "aws_s3_bucket.security_logs",
+                    "evaluations": null,
+                    "check_class": "checkov.common.graph.checks_infra.base_check",
+                    "fixed_definition": null,
+                    "entity_tags": {},
+                    "caller_file_path": null,
+                    "caller_file_line_range": null,
+                    "resource_address": null,
+                    "severity": null,
+                    "bc_category": null,
+                    "benchmarks": null,
+                    "description": null,
+                    "short_description": null,
+                    "vulnerability_details": null,
+                    "connected_node": null,
+                    "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-general-policies/ensure-that-s3-buckets-are-encrypted-with-kms-by-default",
+                    "details": [],
+                    "check_len": null,
+                    "definition_context_file_path": "/builds/aws_secure/aws-secure-terraform/main.tf"
                 },
                 {
                     "check_id": "CKV2_AWS_61",
@@ -1403,8 +1404,8 @@
                             }
                         },
                         "evaluated_keys": [
-                            "resource_type",
-                            "lifecycle_rule"
+                            "lifecycle_rule",
+                            "resource_type"
                         ]
                     },
                     "code_block": [
@@ -1422,7 +1423,7 @@
                         ]
                     ],
                     "file_path": "/main.tf",
-                    "file_abs_path": "/opt/aws-secure-terraform/main.tf",
+                    "file_abs_path": "/builds/aws_secure/aws-secure-terraform/main.tf",
                     "repo_file_path": "/main.tf",
                     "file_line_range": [
                         6,
@@ -1446,7 +1447,73 @@
                     "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-logging-policies/bc-aws-2-61",
                     "details": [],
                     "check_len": null,
-                    "definition_context_file_path": "/opt/aws-secure-terraform/main.tf"
+                    "definition_context_file_path": "/builds/aws_secure/aws-secure-terraform/main.tf"
+                },
+                {
+                    "check_id": "CKV_AWS_21",
+                    "bc_check_id": "BC_AWS_S3_16",
+                    "check_name": "Ensure all data stored in the S3 bucket have versioning enabled",
+                    "check_result": {
+                        "result": "FAILED",
+                        "entity": {
+                            "aws_s3_bucket": {
+                                "security_logs": {
+                                    "__end_line__": 8,
+                                    "__start_line__": 6,
+                                    "bucket": [
+                                        "my-security-logs-${var.account_id}"
+                                    ],
+                                    "__address__": "aws_s3_bucket.security_logs",
+                                    "__provider_address__": "aws.default"
+                                }
+                            }
+                        },
+                        "evaluated_keys": [
+                            "versioning_configuration/status",
+                            "versioning/enabled",
+                            "resource_type"
+                        ]
+                    },
+                    "code_block": [
+                        [
+                            6,
+                            "resource \"aws_s3_bucket\" \"security_logs\" {\n"
+                        ],
+                        [
+                            7,
+                            "  bucket = \"my-security-logs-${var.account_id}\"\n"
+                        ],
+                        [
+                            8,
+                            "}\n"
+                        ]
+                    ],
+                    "file_path": "/main.tf",
+                    "file_abs_path": "/builds/aws_secure/aws-secure-terraform/main.tf",
+                    "repo_file_path": "/main.tf",
+                    "file_line_range": [
+                        6,
+                        8
+                    ],
+                    "resource": "aws_s3_bucket.security_logs",
+                    "evaluations": null,
+                    "check_class": "checkov.common.graph.checks_infra.base_check",
+                    "fixed_definition": null,
+                    "entity_tags": {},
+                    "caller_file_path": null,
+                    "caller_file_line_range": null,
+                    "resource_address": null,
+                    "severity": null,
+                    "bc_category": null,
+                    "benchmarks": null,
+                    "description": null,
+                    "short_description": null,
+                    "vulnerability_details": null,
+                    "connected_node": null,
+                    "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/s3-policies/s3-16-enable-versioning",
+                    "details": [],
+                    "check_len": null,
+                    "definition_context_file_path": "/builds/aws_secure/aws-secure-terraform/main.tf"
                 },
                 {
                     "check_id": "CKV_AWS_144",
@@ -1468,9 +1535,9 @@
                             }
                         },
                         "evaluated_keys": [
-                            "replication_configuration/rules/*/status",
+                            "rule/*/status",
                             "resource_type",
-                            "rule/*/status"
+                            "replication_configuration/rules/*/status"
                         ]
                     },
                     "code_block": [
@@ -1488,7 +1555,7 @@
                         ]
                     ],
                     "file_path": "/main.tf",
-                    "file_abs_path": "/opt/aws-secure-terraform/main.tf",
+                    "file_abs_path": "/builds/aws_secure/aws-secure-terraform/main.tf",
                     "repo_file_path": "/main.tf",
                     "file_line_range": [
                         6,
@@ -1512,74 +1579,7 @@
                     "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-general-policies/ensure-that-s3-bucket-has-cross-region-replication-enabled",
                     "details": [],
                     "check_len": null,
-                    "definition_context_file_path": "/opt/aws-secure-terraform/main.tf"
-                },
-                {
-                    "check_id": "CKV2_AWS_3",
-                    "bc_check_id": "BC_AWS_GENERAL_66",
-                    "check_name": "Ensure GuardDuty is enabled to specific org/region",
-                    "check_result": {
-                        "result": "FAILED",
-                        "entity": {
-                            "aws_guardduty_detector": {
-                                "gd": {
-                                    "__end_line__": 33,
-                                    "__start_line__": 31,
-                                    "enable": [
-                                        true
-                                    ],
-                                    "__address__": "aws_guardduty_detector.gd",
-                                    "__provider_address__": "aws.default"
-                                }
-                            }
-                        },
-                        "evaluated_keys": [
-                            "resource_type",
-                            "enable",
-                            "auto_enable",
-                            "auto_enable_organization_members"
-                        ]
-                    },
-                    "code_block": [
-                        [
-                            31,
-                            "resource \"aws_guardduty_detector\" \"gd\" {\n"
-                        ],
-                        [
-                            32,
-                            "  enable = true\n"
-                        ],
-                        [
-                            33,
-                            "}\n"
-                        ]
-                    ],
-                    "file_path": "/main.tf",
-                    "file_abs_path": "/opt/aws-secure-terraform/main.tf",
-                    "repo_file_path": "/main.tf",
-                    "file_line_range": [
-                        31,
-                        33
-                    ],
-                    "resource": "aws_guardduty_detector.gd",
-                    "evaluations": null,
-                    "check_class": "checkov.common.graph.checks_infra.base_check",
-                    "fixed_definition": null,
-                    "entity_tags": {},
-                    "caller_file_path": null,
-                    "caller_file_line_range": null,
-                    "resource_address": null,
-                    "severity": null,
-                    "bc_category": null,
-                    "benchmarks": null,
-                    "description": null,
-                    "short_description": null,
-                    "vulnerability_details": null,
-                    "connected_node": null,
-                    "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-general-policies/ensure-guardduty-is-enabled-to-specific-orgregion",
-                    "details": [],
-                    "check_len": null,
-                    "definition_context_file_path": "/opt/aws-secure-terraform/main.tf"
+                    "definition_context_file_path": "/builds/aws_secure/aws-secure-terraform/main.tf"
                 }
             ],
             "skipped_checks": [],
@@ -1620,37 +1620,37 @@
         "results": {
             "passed_checks": [
                 {
-                    "check_id": "CKV_GITLABCI_3",
+                    "check_id": "CKV_GITLABCI_1",
                     "bc_check_id": null,
-                    "check_name": "Detecting image usages in gitlab workflows",
+                    "check_name": "Suspicious use of curl with CI environment variables in script",
                     "check_result": {
                         "result": "PASSED",
                         "results_configuration": {
-                            "0": "bridgecrew/checkov:latest",
-                            "__startline__": 6,
-                            "__endline__": 6
+                            "0": "checkov -d . -o json --soft-fail > checkov-report.json",
+                            "__startline__": 10,
+                            "__endline__": 10
                         }
                     },
                     "code_block": [
                         [
-                            6,
-                            "  image: bridgecrew/checkov:latest\n"
+                            10,
+                            "    - checkov -d . -o json --soft-fail > checkov-report.json\n"
                         ],
                         [
-                            7,
-                            "  script:\n"
+                            11,
+                            "  artifacts:\n"
                         ]
                     ],
                     "file_path": "/.gitlab-ci.yml",
-                    "file_abs_path": "/opt/aws-secure-terraform/.gitlab-ci.yml",
+                    "file_abs_path": "/builds/aws_secure/aws-secure-terraform/.gitlab-ci.yml",
                     "repo_file_path": "/.gitlab-ci.yml",
                     "file_line_range": [
-                        6,
-                        7
+                        10,
+                        11
                     ],
                     "resource": "checkov_scan",
                     "evaluations": null,
-                    "check_class": "checkov.gitlab_ci.checks.job.DetectImagesUsage",
+                    "check_class": "checkov.gitlab_ci.checks.job.SuspectCurlInScript",
                     "fixed_definition": null,
                     "entity_tags": null,
                     "caller_file_path": null,
@@ -1675,31 +1675,260 @@
                     "check_result": {
                         "result": "PASSED",
                         "results_configuration": {
-                            "0": "checkov -d .",
-                            "__startline__": 8,
-                            "__endline__": 8
+                            "0": "trivy config --format json --output trivy-report.json .",
+                            "__startline__": 23,
+                            "__endline__": 23
                         }
                     },
                     "code_block": [
                         [
-                            8,
-                            "    - checkov -d .\n"
+                            23,
+                            "    - trivy config --format json --output trivy-report.json .\n"
                         ],
                         [
-                            9,
-                            "  only:\n"
+                            24,
+                            "  artifacts:\n"
                         ]
                     ],
                     "file_path": "/.gitlab-ci.yml",
-                    "file_abs_path": "/opt/aws-secure-terraform/.gitlab-ci.yml",
+                    "file_abs_path": "/builds/aws_secure/aws-secure-terraform/.gitlab-ci.yml",
                     "repo_file_path": "/.gitlab-ci.yml",
                     "file_line_range": [
-                        8,
-                        9
+                        23,
+                        24
                     ],
-                    "resource": "checkov_scan",
+                    "resource": "trivy_iac_scan",
                     "evaluations": null,
                     "check_class": "checkov.gitlab_ci.checks.job.SuspectCurlInScript",
+                    "fixed_definition": null,
+                    "entity_tags": null,
+                    "caller_file_path": null,
+                    "caller_file_line_range": null,
+                    "resource_address": null,
+                    "severity": null,
+                    "bc_category": null,
+                    "benchmarks": null,
+                    "description": null,
+                    "short_description": null,
+                    "vulnerability_details": null,
+                    "connected_node": null,
+                    "guideline": null,
+                    "details": [],
+                    "check_len": null,
+                    "definition_context_file_path": null
+                },
+                {
+                    "check_id": "CKV_GITLABCI_1",
+                    "bc_check_id": null,
+                    "check_name": "Suspicious use of curl with CI environment variables in script",
+                    "check_result": {
+                        "result": "PASSED",
+                        "results_configuration": {
+                            "0": "gitleaks detect --source=. --report-format=json --report-path=gitleaks-report.json --no-git",
+                            "__startline__": 36,
+                            "__endline__": 36
+                        }
+                    },
+                    "code_block": [
+                        [
+                            36,
+                            "    - gitleaks detect --source=. --report-format=json --report-path=gitleaks-report.json --no-git\n"
+                        ],
+                        [
+                            37,
+                            "  artifacts:\n"
+                        ]
+                    ],
+                    "file_path": "/.gitlab-ci.yml",
+                    "file_abs_path": "/builds/aws_secure/aws-secure-terraform/.gitlab-ci.yml",
+                    "repo_file_path": "/.gitlab-ci.yml",
+                    "file_line_range": [
+                        36,
+                        37
+                    ],
+                    "resource": "gitleaks",
+                    "evaluations": null,
+                    "check_class": "checkov.gitlab_ci.checks.job.SuspectCurlInScript",
+                    "fixed_definition": null,
+                    "entity_tags": null,
+                    "caller_file_path": null,
+                    "caller_file_line_range": null,
+                    "resource_address": null,
+                    "severity": null,
+                    "bc_category": null,
+                    "benchmarks": null,
+                    "description": null,
+                    "short_description": null,
+                    "vulnerability_details": null,
+                    "connected_node": null,
+                    "guideline": null,
+                    "details": [],
+                    "check_len": null,
+                    "definition_context_file_path": null
+                },
+                {
+                    "check_id": "CKV_GITLABCI_3",
+                    "bc_check_id": null,
+                    "check_name": "Detecting image usages in gitlab workflows",
+                    "check_result": {
+                        "result": "PASSED",
+                        "results_configuration": {
+                            "name": "bridgecrew/checkov:latest",
+                            "entrypoint": [
+                                ""
+                            ],
+                            "__startline__": 7,
+                            "__endline__": 9
+                        }
+                    },
+                    "code_block": [
+                        [
+                            7,
+                            "    name: bridgecrew/checkov:latest\n"
+                        ],
+                        [
+                            8,
+                            "    entrypoint: [\"\"]\n"
+                        ],
+                        [
+                            9,
+                            "  script:\n"
+                        ],
+                        [
+                            10,
+                            "    - checkov -d . -o json --soft-fail > checkov-report.json\n"
+                        ]
+                    ],
+                    "file_path": "/.gitlab-ci.yml",
+                    "file_abs_path": "/builds/aws_secure/aws-secure-terraform/.gitlab-ci.yml",
+                    "repo_file_path": "/.gitlab-ci.yml",
+                    "file_line_range": [
+                        7,
+                        10
+                    ],
+                    "resource": "checkov_scan.image",
+                    "evaluations": null,
+                    "check_class": "checkov.gitlab_ci.checks.job.DetectImagesUsage",
+                    "fixed_definition": null,
+                    "entity_tags": null,
+                    "caller_file_path": null,
+                    "caller_file_line_range": null,
+                    "resource_address": null,
+                    "severity": null,
+                    "bc_category": null,
+                    "benchmarks": null,
+                    "description": null,
+                    "short_description": null,
+                    "vulnerability_details": null,
+                    "connected_node": null,
+                    "guideline": null,
+                    "details": [],
+                    "check_len": null,
+                    "definition_context_file_path": null
+                },
+                {
+                    "check_id": "CKV_GITLABCI_3",
+                    "bc_check_id": null,
+                    "check_name": "Detecting image usages in gitlab workflows",
+                    "check_result": {
+                        "result": "PASSED",
+                        "results_configuration": {
+                            "name": "aquasec/trivy",
+                            "entrypoint": [
+                                ""
+                            ],
+                            "__startline__": 20,
+                            "__endline__": 22
+                        }
+                    },
+                    "code_block": [
+                        [
+                            20,
+                            "    name: aquasec/trivy\n"
+                        ],
+                        [
+                            21,
+                            "    entrypoint: [\"\"]\n"
+                        ],
+                        [
+                            22,
+                            "  script:\n"
+                        ],
+                        [
+                            23,
+                            "    - trivy config --format json --output trivy-report.json .\n"
+                        ]
+                    ],
+                    "file_path": "/.gitlab-ci.yml",
+                    "file_abs_path": "/builds/aws_secure/aws-secure-terraform/.gitlab-ci.yml",
+                    "repo_file_path": "/.gitlab-ci.yml",
+                    "file_line_range": [
+                        20,
+                        23
+                    ],
+                    "resource": "trivy_iac_scan.image",
+                    "evaluations": null,
+                    "check_class": "checkov.gitlab_ci.checks.job.DetectImagesUsage",
+                    "fixed_definition": null,
+                    "entity_tags": null,
+                    "caller_file_path": null,
+                    "caller_file_line_range": null,
+                    "resource_address": null,
+                    "severity": null,
+                    "bc_category": null,
+                    "benchmarks": null,
+                    "description": null,
+                    "short_description": null,
+                    "vulnerability_details": null,
+                    "connected_node": null,
+                    "guideline": null,
+                    "details": [],
+                    "check_len": null,
+                    "definition_context_file_path": null
+                },
+                {
+                    "check_id": "CKV_GITLABCI_3",
+                    "bc_check_id": null,
+                    "check_name": "Detecting image usages in gitlab workflows",
+                    "check_result": {
+                        "result": "PASSED",
+                        "results_configuration": {
+                            "name": "zricethezav/gitleaks",
+                            "entrypoint": [
+                                ""
+                            ],
+                            "__startline__": 33,
+                            "__endline__": 35
+                        }
+                    },
+                    "code_block": [
+                        [
+                            33,
+                            "    name: zricethezav/gitleaks\n"
+                        ],
+                        [
+                            34,
+                            "    entrypoint: [\"\"]\n"
+                        ],
+                        [
+                            35,
+                            "  script:\n"
+                        ],
+                        [
+                            36,
+                            "    - gitleaks detect --source=. --report-format=json --report-path=gitleaks-report.json --no-git\n"
+                        ]
+                    ],
+                    "file_path": "/.gitlab-ci.yml",
+                    "file_abs_path": "/builds/aws_secure/aws-secure-terraform/.gitlab-ci.yml",
+                    "repo_file_path": "/.gitlab-ci.yml",
+                    "file_line_range": [
+                        33,
+                        36
+                    ],
+                    "resource": "gitleaks.image",
+                    "evaluations": null,
+                    "check_class": "checkov.gitlab_ci.checks.job.DetectImagesUsage",
                     "fixed_definition": null,
                     "entity_tags": null,
                     "caller_file_path": null,
@@ -1723,7 +1952,7 @@
             "parsing_errors": []
         },
         "summary": {
-            "passed": 2,
+            "passed": 6,
             "failed": 0,
             "skipped": 0,
             "parsing_errors": 0,
