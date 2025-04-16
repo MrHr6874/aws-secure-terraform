@@ -7,7 +7,7 @@ checkov_scan:
     name: bridgecrew/checkov:latest
     entrypoint: [""]
   script:
-    - checkov -d . --soft-fail
+    - checkov -d . --soft-fail --output json
   only:
     - main
     - merge_requests
